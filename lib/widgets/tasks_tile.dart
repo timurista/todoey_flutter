@@ -1,42 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoeyflutter/models/tasks.dart';
+import 'package:provider/provider.dart';
 
 class TasksTile extends StatelessWidget {
-  TasksTile({@required this.item});
+  TasksTile({@required this.task, this.onToggle});
 
-  final item;
+  final onToggle;
+  final task;
 
   @override
   Widget build(BuildContext context) {
-    final isChecked = item.status == StatusEum.DONE;
+    final isChecked = task.status == StatusEum.DONE;
     return ListTile(
       title: Text(
-        item.name,
+        task.name,
         style: TextStyle(
           decoration: isChecked ? TextDecoration.lineThrough : null,
         ),
       ),
-      trailing: TaskCheckbox(
-          isChecked: isChecked,
-          onToggle: (value) {
-            print(value);
-          }),
-    );
-  }
-}
-
-class TaskCheckbox extends StatelessWidget {
-  TaskCheckbox({this.isChecked, this.onToggle});
-
-  final bool isChecked;
-  final Function onToggle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      onChanged: onToggle,
-      value: isChecked,
-      activeColor: Colors.lightBlueAccent,
+      trailing: Checkbox(
+        onChanged: onToggle,
+        value: isChecked,
+        activeColor: Colors.lightBlueAccent,
+      ),
     );
   }
 }

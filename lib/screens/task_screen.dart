@@ -3,6 +3,7 @@ import 'package:todoeyflutter/models/tasks.dart';
 import 'package:todoeyflutter/widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 import 'package:todoeyflutter/widgets/tasks_tile.dart';
+import 'package:provider/provider.dart';
 
 class TasksScreen extends StatefulWidget {
   TasksScreen({Key key, this.title}) : super(key: key);
@@ -14,29 +15,8 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  int _counter = 0;
-  List<Task> _items = [
-    Task(name: "be epic", status: StatusEum.DONE),
-    Task(name: "do thing", status: StatusEum.PENDING),
-  ];
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      _items.add(Task(name: "do more things", status: StatusEum.PENDING));
-    });
-  }
-
-  void _handleAdd() {}
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
@@ -69,7 +49,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  "12 tasks",
+                  "${Provider.of<TaskData>(context).taskSize} tasks",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -88,7 +68,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topLeft: Radius.circular(20),
                 ),
               ),
-              child: TasksList(items: _items),
+              child: TasksList(),
             ),
           )
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoeyflutter/widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
 enum statues { DONE, PENDING }
 
@@ -30,6 +31,8 @@ class _TasksScreenState extends State<TasksScreen> {
       );
     });
   }
+
+  void _handleAdd() {}
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,19 @@ class _TasksScreenState extends State<TasksScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(),
+              ),
+            ),
+          );
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

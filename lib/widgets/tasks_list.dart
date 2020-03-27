@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:todoeyflutter/models/tasks.dart';
 import 'tasks_tile.dart';
 
 class TasksList extends StatelessWidget {
-  const TasksList({
-    Key key,
-    @required List items,
-  })  : _items = items,
-        super(key: key);
+  TasksList({this.items});
 
-  final List _items;
+  final List<Task> items;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: _items.map((item) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        print(index);
         return TasksTile(
-          item: item,
+          item: items[index],
         );
-      }).toList(),
+      },
+      itemCount: this.items.length,
     );
   }
 }

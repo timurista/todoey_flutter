@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todoeyflutter/models/tasks.dart';
 import 'package:todoeyflutter/widgets/tasks_list.dart';
 import 'add_task_screen.dart';
-
-enum statues { DONE, PENDING }
+import 'package:todoeyflutter/widgets/tasks_tile.dart';
 
 class TasksScreen extends StatefulWidget {
   TasksScreen({Key key, this.title}) : super(key: key);
@@ -15,20 +15,15 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   int _counter = 0;
-  List _items = [
-    {"name": "be epic", "status": statues.DONE},
-    {"name": "do things", "status": statues.PENDING},
+  List<Task> _items = [
+    Task(name: "be epic", status: StatusEum.DONE),
+    Task(name: "do thing", status: StatusEum.PENDING),
   ];
 
   void _incrementCounter() {
     setState(() {
       _counter++;
-      _items.add(
-        {
-          "name": "do more things",
-          "status": statues.PENDING,
-        },
-      );
+      _items.add(Task(name: "do more things", status: StatusEum.PENDING));
     });
   }
 

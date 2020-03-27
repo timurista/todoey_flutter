@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum statues { DONE, PENDING }
+import 'package:todoeyflutter/models/tasks.dart';
 
 class TasksTile extends StatelessWidget {
   TasksTile({@required this.item});
@@ -9,11 +8,35 @@ class TasksTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isChecked = item.status == StatusEum.DONE;
     return ListTile(
-      title: Text(item["name"]),
-      trailing: Checkbox(
-        value: item["status"] == statues.DONE,
+      title: Text(
+        item.name,
+        style: TextStyle(
+          decoration: isChecked ? TextDecoration.lineThrough : null,
+        ),
       ),
+      trailing: TaskCheckbox(
+          isChecked: isChecked,
+          onToggle: (value) {
+            print(value);
+          }),
+    );
+  }
+}
+
+class TaskCheckbox extends StatelessWidget {
+  TaskCheckbox({this.isChecked, this.onToggle});
+
+  final bool isChecked;
+  final Function onToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      onChanged: onToggle,
+      value: isChecked,
+      activeColor: Colors.lightBlueAccent,
     );
   }
 }

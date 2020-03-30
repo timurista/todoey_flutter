@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoeyflutter/models/tasks.dart';
-import 'package:provider/provider.dart';
 
 class TasksTile extends StatelessWidget {
-  TasksTile({@required this.task, this.onToggle});
+  TasksTile({@required this.task, this.onToggle, this.onLongPress});
 
   final onToggle;
+  final onLongPress;
   final task;
 
   @override
   Widget build(BuildContext context) {
     final isChecked = task.status == StatusEum.DONE;
     return ListTile(
+      onLongPress: onLongPress,
       title: Text(
         task.name,
         style: TextStyle(

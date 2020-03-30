@@ -48,6 +48,13 @@ class TaskData extends ChangeNotifier {
     }
   }
 
+  deleteTask(taskIndex) {
+    if (taskIndex != -1) {
+      this._tasks.removeAt(taskIndex);
+      notifyListeners();
+    }
+  }
+
   changeData(data) {
     this.data = data;
     notifyListeners();
